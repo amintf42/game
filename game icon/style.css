@@ -8,6 +8,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    font-family: helvetica;
+
 }
 
 section {
@@ -25,19 +28,43 @@ ul {
     padding: 0;
     margin: 0;
 }
-li{
+
+li {
     border: 1px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-i{
+
+i {
     font-size: 3rem;
 }
-li i{
+
+li i {
     display: none !important;
 }
 
-li.show i{
+li.show i {
     display: block !important;
+}
+
+.bg-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 480px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    border: 1px solid gray;
+    background-color: aliceblue;
+}
+.btn{
+    background-color: rgb(59, 151, 255);
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+.pointer-none {
+    pointer-events: none;
 }

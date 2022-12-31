@@ -4,13 +4,18 @@ let opencards = [];
 icons = shuffle(icons);
 let ul = document.querySelector("ul");
 ul.innerHTML = "";
+let startbtn = document.querySelector(".btn");
+let minute = document.querySelector(".minute");
+let second = document.querySelector(".second");
+let counter = document.querySelector("span.count");
+
+
 for (const icon of icons ) {
     ul.appendChild(icon);
     icon.addEventListener("click",showcard);    
 
 }
 
-//testtesttesttest
 // function
  function shuffle(array){
     for(let i=0; i<array.length; i++){
@@ -25,6 +30,7 @@ function showcard(){
     this.classList.add("show")
     opencards.push(this);
     if(opencards.length == 2) {
+        counter.textContent = 1 + +counter.textContent;
         if(opencards[0].innerHTML === opencards[1].innerHTML){
             opencards[0].style.background = "green";
             opencards[1].style.background = "green";
@@ -43,9 +49,55 @@ function showcard(){
 
     }
 }
+function startgame(){
+    showallcards()
+    setTimeout(function(){
+        hideallcards()
+        starttimer()
+        
+    },2000)
+}
+
+function showallcards(){
+    for (const icon of icons) {
+        icon.classList.add("show");
+    }
+}
+function hideallcards(){
+    for (const icon of icons) {
+        icon.classList.remove("show");
+    }
+}
+
+function starttimer(){
+setInterval(function(){
+    let secondtime = +second.textContent;
+    let minutetime = +minute.textContent;
+    secondtime++;
+    if(secondtime == 60){
+        secondtime = 0;
+        minutetime++;
+        minute.textContent = minutetime;
+    }
+    second.textContent = secondtime;
+},1000)
+}
+
+function enableallcards(){
+    for (const icon of icons) {
+        icon.classList.remove("pointer-none");
+    }
+}
+function disanableallcards(){
+    for (const icon of icons) {
+        icon.classList.add("pointer-none");
+    }
+}
 
 
 // events
 // for (const icon of icons) {
 //     icon.addEventListener("click",showcard);    
+
 // }
+startbtn.addEventListener("click",startgame)
