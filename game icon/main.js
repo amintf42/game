@@ -8,87 +8,97 @@ let startbtn = document.querySelector(".btn");
 let minute = document.querySelector(".minute");
 let second = document.querySelector(".second");
 let counter = document.querySelector("span.count");
+let greencards = 0;
 
-
-for (const icon of icons ) {
+for (const icon of icons) {
     ul.appendChild(icon);
-    icon.addEventListener("click",showcard);    
-
+    icon.addEventListener("click", showcard);
+    icon.classList.add("pointer-none");
 }
 
 // function
- function shuffle(array){
-    for(let i=0; i<array.length; i++){
-        let random = Math.floor(Math.random()*array.length);
+function shuffle(array) {
+    for (let i = 0; i < array.length; i++) {
+        let random = Math.floor(Math.random() * array.length);
         let temp = array[i];
         array[i] = array[random];
         array[random] = temp;
     }
     return array;
- }
-function showcard(){
+}
+function showcard() {
     this.classList.add("show")
     opencards.push(this);
-    if(opencards.length == 2) {
+    if (opencards.length == 2) {
         counter.textContent = 1 + +counter.textContent;
-        if(opencards[0].innerHTML === opencards[1].innerHTML){
+        if (opencards[0].innerHTML === opencards[1].innerHTML) {
             opencards[0].style.background = "green";
             opencards[1].style.background = "green";
             opencards.length = 0;
-        }else{
+        } else {
             opencards[0].style.background = "red";
             opencards[1].style.background = "red";
-            setTimeout( function(){
+            disanableallcards()
+            setTimeout(function () {
                 opencards[0].classList.remove("show");
                 opencards[1].classList.remove("show");
                 opencards[0].style.background = "";
                 opencards[1].style.background = "";
                 opencards.length = 0;
-            } , 1000)
+                enableallcards()
+            }, 1000)
         }
 
+
     }
+    setTimeout(function () {
+        if (greencards === 16) {
+            alert("YOU WIN !!!")
+        }
+    }, 100)
 }
-function startgame(){
+function startgame() {
     showallcards()
-    setTimeout(function(){
+    setTimeout(function () {
         hideallcards()
         starttimer()
-        
-    },2000)
+
+    }, 2000)
 }
 
-function showallcards(){
+function showallcards() {
     for (const icon of icons) {
         icon.classList.add("show");
     }
 }
-function hideallcards(){
+function hideallcards() {
     for (const icon of icons) {
         icon.classList.remove("show");
     }
 }
 
-function starttimer(){
-setInterval(function(){
-    let secondtime = +second.textContent;
-    let minutetime = +minute.textContent;
-    secondtime++;
-    if(secondtime == 60){
-        secondtime = 0;
-        minutetime++;
-        minute.textContent = minutetime;
-    }
-    second.textContent = secondtime;
-},1000)
+function starttimer() {
+    setInterval(function () {
+        let secondtime = +second.textContent;
+        let minutetime = +minute.textContent;
+        secondtime++;
+        if (secondtime == 60) {
+            secondtime = 0;
+            minutetime++;
+            minute.textContent = minutetime;
+        }
+        second.textContent = secondtime;
+    }, 1000)
 }
 
-function enableallcards(){
+
+
+function enableallcards() {
     for (const icon of icons) {
         icon.classList.remove("pointer-none");
     }
 }
-function disanableallcards(){
+function disanableallcards() {
     for (const icon of icons) {
         icon.classList.add("pointer-none");
     }
@@ -96,8 +106,8 @@ function disanableallcards(){
 
 
 // events
-// for (const icon of icons) {
-//     icon.addEventListener("click",showcard);    
+for (const icon of icons) {
+    icon.addEventListener("click",showcard);    
 
-// }
-startbtn.addEventListener("click",startgame)
+}
+startbtn.addEventListener("click", startgame)
