@@ -34,6 +34,7 @@ function showcard() {
         if (opencards[0].innerHTML === opencards[1].innerHTML) {
             opencards[0].style.background = "green";
             opencards[1].style.background = "green";
+            greencards += 2;
             opencards.length = 0;
         } else {
             opencards[0].style.background = "red";
@@ -62,7 +63,7 @@ function startgame() {
     setTimeout(function () {
         hideallcards()
         starttimer()
-
+        enableallcards()
     }, 2000)
 }
 
@@ -91,13 +92,6 @@ function starttimer() {
     }, 1000)
 }
 
-
-
-function enableallcards() {
-    for (const icon of icons) {
-        icon.classList.remove("pointer-none");
-    }
-}
 function disanableallcards() {
     for (const icon of icons) {
         icon.classList.add("pointer-none");
@@ -105,9 +99,16 @@ function disanableallcards() {
 }
 
 
+function enableallcards() {
+    for (const icon of icons) {
+        icon.classList.remove("pointer-none");
+    }
+}
+
+
 // events
 for (const icon of icons) {
-    icon.addEventListener("click",showcard);    
+    icon.addEventListener("click", showcard);
 
 }
 startbtn.addEventListener("click", startgame)

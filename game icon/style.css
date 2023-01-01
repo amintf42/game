@@ -43,7 +43,9 @@ i {
 li i {
     display: none !important;
 }
-
+li.show {
+    pointer-events: none;
+}
 li.show i {
     display: block !important;
 }
