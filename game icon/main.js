@@ -39,7 +39,7 @@ function showcard() {
         } else {
             opencards[0].style.background = "red";
             opencards[1].style.background = "red";
-            disanableallcards()
+            disableallcards()
             setTimeout(function () {
                 opencards[0].classList.remove("show");
                 opencards[1].classList.remove("show");
@@ -55,10 +55,14 @@ function showcard() {
     setTimeout(function () {
         if (greencards === 16) {
             alert("YOU WIN !!!")
+            startbtn.classList.remove("pointer-none");
+            clearInterval(starttimer())
+
         }
     }, 100)
 }
 function startgame() {
+    startbtn.classList.add("pointer-none");
     showallcards()
     setTimeout(function () {
         hideallcards()
@@ -89,10 +93,11 @@ function starttimer() {
             minute.textContent = minutetime;
         }
         second.textContent = secondtime;
-    }, 1000)
+    }, 1000) ;
+   
 }
 
-function disanableallcards() {
+function disableallcards() {
     for (const icon of icons) {
         icon.classList.add("pointer-none");
     }
