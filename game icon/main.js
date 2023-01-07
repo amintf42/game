@@ -5,10 +5,16 @@ icons = shuffle(icons);
 let ul = document.querySelector("ul");
 ul.innerHTML = "";
 let startbtn = document.querySelector(".btn");
+let restartbtn = document.querySelector(".btn2");
 let minute = document.querySelector(".minute");
 let second = document.querySelector(".second");
 let counter = document.querySelector("span.count");
 let greencards = 0;
+let slm = null;
+second.textContent = second.textContent.padStart(2,0);
+minute.textContent = minute.textContent.padStart(2,0);
+
+
 
 for (const icon of icons) {
     ul.appendChild(icon);
@@ -17,6 +23,37 @@ for (const icon of icons) {
 }
 
 // function
+
+// function mainpart(){
+//     icons.style.background = "";
+//     counter.textContent = 0;
+//     minute = 0;
+//     second = 0;
+// }
+function restartGame() {
+    debugger;
+    restartbtn.classList.add("pointer-none");
+    for (const icon of icons) {
+    icon.style.background = "#222";
+        
+    }
+icons = shuffle(icons);
+
+    // icons.style.background = "#222";
+    counter.textContent = 0;
+    // minute.innerHTML = 0;
+    minute.textContent = ''.padStart(2,0);
+    second.textContent = ''.padStart(2,0);
+    // second = 0;
+    showallcards()
+    setTimeout(function () {
+        hideallcards()
+        starttimer()
+        enableallcards()
+    }, 2000)
+
+}
+
 function shuffle(array) {
     for (let i = 0; i < array.length; i++) {
         let random = Math.floor(Math.random() * array.length);
@@ -56,8 +93,9 @@ function showcard() {
         if (greencards === 16) {
             alert("YOU WIN !!!")
             startbtn.classList.remove("pointer-none");
-            clearInterval(starttimer())
-
+            startbtn.classList.remove("pointer-none");
+            clearInterval(slm)
+            // opencards.style.background = "";
         }
     }, 100)
 }
@@ -83,18 +121,21 @@ function hideallcards() {
 }
 
 function starttimer() {
-    setInterval(function () {
+    clearInterval(slm);
+    slm = setInterval(function () {
         let secondtime = +second.textContent;
         let minutetime = +minute.textContent;
         secondtime++;
         if (secondtime == 60) {
             secondtime = 0;
             minutetime++;
-            minute.textContent = minutetime;
+            // minute.textContent = minutetime;
+            minute.textContent = minutetime.toString().padStart(2,0);
         }
-        second.textContent = secondtime;
-    }, 1000) ;
-   
+        second.textContent = secondtime.toString().padStart(2,0);
+
+    }, 1000);
+
 }
 
 function disableallcards() {
@@ -117,3 +158,4 @@ for (const icon of icons) {
 
 }
 startbtn.addEventListener("click", startgame)
+restartbtn.addEventListener("click", restartGame)

@@ -54,16 +54,16 @@ li.show i {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 480px;
+    width: 550px;
     padding: 2rem;
     margin-bottom: 1rem;
     border-radius: .5rem;
     border: 1px solid gray;
     background-color: aliceblue;
 }
-.btn{
+.btn , .btn2{
     background-color: rgb(59, 151, 255);
-    padding: .5rem 2rem;
+    padding: .5rem 1rem;
     border-radius: .5rem;
     cursor: pointer;
 }
